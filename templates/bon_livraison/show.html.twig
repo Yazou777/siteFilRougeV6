@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BonLivraison{% endblock %}
+
+{% block body %}
+    {# <h1>BonLivraison</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ bon_livraison.id }}</td>
+            </tr>
+            <tr>
+                <th>Bon_date_envoie</th>
+                <td>{{ bon_livraison.bonDateEnvoie ? bon_livraison.bonDateEnvoie|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_bon_livraison_index') }}">back to list</a>
+
+    <a href="{{ path('app_bon_livraison_edit', {'id': bon_livraison.id}) }}">edit</a>
+
+    {{ include('bon_livraison/_delete_form.html.twig') }} #}
+
+     <div class='container'>
+        <div class='row'>    
+            <img src="/images/logoFacture.jpg" class="logo col-6"> 
+                <div class='col-6 my-auto'>
+                    <div>Bon de livraison N° </div>
+                     <div>(Commande N°  {{ comId }}  du  {{ comDate ? comDate|date('Y-m-d') : '' }})</div>
+                      {# <div>Date : {{ facDate ? facDate|date('Y-m-d') : '' }}</div> #}
+                      
+                </div>
+            <div class='border mb-2 py-2'>
+            {# Client : n°{{ utiId }}, {{ adresse }} , {{ tel }}, {{ email }} #}
+           <div> Client : n°{{ adrLiv.Id }}, {{ adrLiv.AdrNom}} {{ adrLiv.AdrPrenom}}  </div>
+          <div> Adresse de livraison : {{ adrLiv.AdrRue }}, {{ adrLiv.AdrCodePostal }}, {{adrLiv.AdrVille}}, {{ adrLiv.AdrPays}} </div>
+            <div> {{ adrLiv.AdrTelephone }}, {{ email }}  </div>
+            </div>
+            <div class='border py-3'>
+            Adresse de facturation : {{ adrFact.AdrNom }} {{ adrFact.AdrPrenom }} , {{ adrFact.AdrRue }} , {{ adrFact.AdrCodePostal }} {{ adrFact.AdrVille }} {{ adrFact.AdrPays }}
+            </div>
+        </div>
+    
+    <div class='mt-5'> Description de la commande </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>REF.</th>
+                <th>DESIGNATION</th>
+                <th>P U</th>
+                <th>Quantité</th>
+                <th>Total HT</th>
+                <th>TVA</th>
+                <th>Total TTC</th>
+                 {# <th>Adresse</th>
+                <th>Adresse de facturation</th>
+                <th>Numero client</th>
+                <th>Email</th>
+                <th>Telephone</th>
+                <th>Date commande</th> #}
+               {#  <th>Com_adresse_facturation</th>
+                <th>Com_isPaid</th>
+                <th>Com_moyen_paiement</th>
+                <th>Com_stripe_session_id</th>
+                <th>Com_paypal_id</th>
+                <th>actions</th> #}
+            </tr>
+        </thead>
+        <tbody>
+        {# {% for commande in commandes %}
+            <tr>
+             <td>{{ commande.p_id }}</td>
+              <td>{{ commande.p_nom }}</td>
+                <td>{{ commande.p_prix| format_currency('EUR', locale='fr') }}</td>
+                <td>{{ commande.p_quantite }}</td>
+                <td>{{ commande.p_SousTotal| format_currency('EUR', locale='fr') }}</td>
+                <td>{{ (commande.p_SousTotal * 0.2)| format_currency('EUR', locale='fr')}}</td>
+                <td>{{(commande.p_SousTotal + (commande.p_SousTotal * 0.2))| format_currency('EUR', locale='fr')}}</td>
+               
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+           {% for total in totals %}
+           <td>Transporteur</td>
+           <td>{{ total.p_tra }} </td>
+           <td> {{ total.p_fdp | format_currency('EUR', locale='fr') }} </td>
+           <td> </td>
+            <td> {{ total.p_fdp | format_currency('EUR', locale='fr')}} </td>
+             <td colspan="2"></td>
+                          {% endfor %}
+        </tbody>
+          <tfoot>
+          {% for total in totals %}
+                        <tr>
+                         <td colspan="2"></td>
+                            <td colspan="2">Total</td>
+                            
+                            <td> {{ total.p_total | format_currency('EUR', locale='fr')}} </td>
+                            <td> {{ ((total.p_total - total.p_fdp)  * 0.2) | format_currency('EUR', locale='fr') }} </td>
+                            <td> {{ (((total.p_total - total.p_fdp)  * 0.2) + (total.p_total))| format_currency('EUR', locale='fr') }} </td>
+                        </tr>
+                          {% endfor %} #}
+          </tfoot>
+    </table>
+
+    {# <a href="{{ path('app_commande_crud_new') }}">Create new</a> #}
+    <p>Solde payable sous « délai de paiement » à réception de facture, par « mode de paiement ».</p>
+    <div>Pénalité de retard au taux annuel de « nombre » % </div>
+<div>En cas de retard de paiement, application d’une indemnité forfaitaire pour frais de recouvrement de 40 euros (article D. 441-5 du code du commerce).</div>
+   <div class='mt-5'> FilRougeCompany </div>
+    <div> SA au capital de  </div>
+    </div> 
+{% endblock %}

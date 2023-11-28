@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BonLivraison index{% endblock %}
+
+{% block body %}
+    <h1>BonLivraison index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Bon_date_envoie</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for bon_livs in bonLiv %}
+            <tr>
+                <td>{{ bon_livs.id }}</td>
+                <td>{{ bon_livs.bonDateEnvoie ? bon_livs.bonDateEnvoie|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_bon_livraison_show', {'id': bon_livs.id}) }}">show</a>
+                    <a href="{{ path('app_bon_livraison_edit', {'id': bon_livs.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_bon_livraison_new') }}">Create new</a>
+{% endblock %}
